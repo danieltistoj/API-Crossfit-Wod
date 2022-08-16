@@ -31,6 +31,7 @@ const createNeWorkout = (req,res) => {
         exercises: body.exercises,
         trainerTips: body.trainerTips,
     }
+    console.log("newWorkout",newWorkout)
     const createNeWorkout = workoutService.createNeWorkout(newWorkout)
     res.status(201).send({status:"OK",data:createNeWorkout})
 

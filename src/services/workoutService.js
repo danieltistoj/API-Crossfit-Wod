@@ -1,3 +1,4 @@
+const {v4:uuid} = require('uuid')
 const Workout = require('../database/Workout')
 
 const getAllWorkouts = ()=>{
@@ -9,8 +10,16 @@ const getOneWorkout= ()=>{
     return;
 }
 
-const createNeWorkou = ()=>{
-    return;
+const createNeWorkout = (newWorkout)=>{
+    const workoutToInsert = {
+        ...newWorkout,
+        id:uuid(),
+        createAt: new Date().toLocaleDateString("en-US",{timeZone : "UTC"}),
+        updateAt: new Date().toLocaleDateString("en-US",{timeZone: "UTC"}),    
+    }
+    console.log("workoutToInsert",workoutToInsert)
+    const createdWorkout = Workout.createNeWorkout(workoutToInsert)
+    return createdWorkout
 }
 
 const updateOneWorko = ()=>{
@@ -23,7 +32,7 @@ const deleteOneWorko = ()=>{
 module.exports ={
     getAllWorkouts,
     getOneWorkout,
-    createNeWorkou,
+    createNeWorkout,
     updateOneWorko,
     deleteOneWorko,
 }
