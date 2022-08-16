@@ -15,8 +15,26 @@ const getOneWorkout = (req,res) =>{
 }
 
 const createNeWorkout = (req,res) => {
-    const createWorkout = workoutService.createNeWorkout(req.params.workoutId)
-    res.send(`Create workout ${req.params.workoutId}`)
+    const {body} = req
+    if(
+        !body.name || 
+        !body.mode || 
+        !body.equipment || 
+        !body.exercises || 
+        !body.trainerTips){
+            return
+    }
+    const newWorkout ={
+        name: body.name,
+        mode: body.mode,
+        equipment: body.equipment,
+        exercises: body.exercises,
+        trainerTips: body.trainerTips,
+    }
+    const createNeWorkout = workoutService.createNeWorkout(newWorkout)
+    res.status(201).send({status:"OK",data:createNeWorkout})
+
+
 }
 
 const updateOneWorkout = (req,res) =>{
